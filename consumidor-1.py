@@ -7,14 +7,15 @@ connection = pika.BlockingConnection(pika.ConnectionParameters('192.168.56.4')) 
 channel = connection.channel()  # create a communication channel
 
 #Declaramos los canales para el grupo 1 y el canal general o de Broadcast.
-channel.exchange_declare (exchange = 'logs-1' , exchange_type = 'fanout' ) 
+channel.exchange_declare (exchange = 'Grupo-01' , exchange_type = 'direct' ) 
 channel.exchange_declare (exchange = 'Broadcast' , exchange_type = 'fanout' ) 
 #Declaramos nuevamente la cola de la que se van a recibir los mensajes, en este caso variable
-result = channel.queue_declare(queue='Grupo-01', exclusive=True)
+result = channel.queue_declare(queue='', exclusive=True)
 queue_name = result.method.queue
 
+
 #(Union o enlace) con cada uno de los canales
-channel.queue_bind(exchange='logs-1', queue=queue_name)
+channel.queue_bind(exchange='Grupo-01', queue=queue_name, routing_key='firstGroup')
 channel.queue_bind(exchange='Broadcast', queue=queue_name)
 
 print(' [*] Waiting for logs. To exit press CTRL+C')
@@ -34,7 +35,3 @@ channel.basic_consume(queue=queue_name, on_message_callback=callback, auto_ack=T
 print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()  # initialize the consumer
 
-
-# ingresamos en un bucle interminable que espera datos y ejecuta devoluciones de llamada siempre que sea necesario.
-print(' [*] Waiting for messages. To exit press CTRL+C')
-channel.start_consuming()
