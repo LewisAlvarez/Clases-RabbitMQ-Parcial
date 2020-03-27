@@ -2,8 +2,11 @@
 #! / usr / bin / env python 
 import pika 
 
+#Credenciales para conectarse al servidor 
+credentials = pika.PlainCredentials('consumidorDos', 'password')
+
 #Primero debemos de conectarnos al servidor RabbitMQ
-connection = pika.BlockingConnection(pika.ConnectionParameters('192.168.56.4'))  # connect to server
+connection = pika.BlockingConnection(pika.ConnectionParameters('192.168.56.4', credentials=credentials))  # connect to server
 channel = connection.channel()  # create a communication channel
 
 #Declaramos los canales para el grupo 2 y el canal general o de Broadcast.

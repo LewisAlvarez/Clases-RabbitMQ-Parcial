@@ -6,15 +6,15 @@ import time
 #Creamos el canal de comunicacion
 
 #Conxxion canal Grupo-01 para el consumidor Consumidor-1
-connection_GroupOne = pika.BlockingConnection(pika.ConnectionParameters('192.168.56.2'))
+connection_GroupOne = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channelGroupOne = connection_GroupOne.channel()
 
 #Conxxion canal Grupo-02 para el consumidor Consumidor-2
-connection_GroupTwo = pika.BlockingConnection(pika.ConnectionParameters('192.168.56.3'))
+connection_GroupTwo = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channelGroupTwo = connection_GroupTwo.channel()
 
 #Conxxion canal General (Broadcast) para ambos consumidores
-connection_Generally = pika.BlockingConnection(pika.ConnectionParameters('')) #Aqui no puse Ip pq se supone que es la de broadcast y el Fanout la deberia hacer
+connection_Generally = pika.BlockingConnection(pika.ConnectionParameters('localhost')) #Todas se conectan con el servidor rabbit en localhost -- el Fanout la deberia hacer
 channelGenerally = connection_Generally.channel()
 
 #Declaramos el exchange, el cual va a administrar la cola hacia el consumidor 1
