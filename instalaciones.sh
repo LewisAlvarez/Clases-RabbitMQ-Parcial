@@ -1,7 +1,7 @@
  #!/bin/bash
 
 echo "Primero comprobaremos en que host estamos"
-nombre=$USER
+nombre=$(hostname)
 productor="productor"
 consumidorUno="consumidorUno"
 consumidorDos="consumidorDos"
@@ -24,6 +24,12 @@ sudo apt -y install rabbitmq-server
 sudo systemctl enable rabbitmq-server
 sudo systemctl is-enabled rabbitmq-server.service
 echo "Finaliza la instalacion de RabbitMQ"
+
+echo "Instalaciones de python, pip y python3"
+sudo apt -y install python3-pip
+sudo apt -y install python
+sudo apt -y install python-pip
+echo "Finaliza actualizaciones de python, pip y python3"
 
 echo "Continuamos con la instalacion de Pika"
 python -m pip install pika --upgrade
@@ -48,6 +54,13 @@ python exchangeBroker.py
 echo "Termino la instalacion del productor"
 
 else
+
+ echo "Instalaciones de python, pip y python3"
+ sudo apt -y install python3-pip
+ sudo apt -y install python
+ sudo apt -y install python-pip
+ echo "Finaliza actualizaciones de python, pip y python3"
+
  echo "Continuamos con la instalacion de Pika"
  python -m pip install pika --upgrade
  echo "Finaliza la instalacion de Pika"
