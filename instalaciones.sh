@@ -39,7 +39,6 @@ echo "Creamos los usuarios"
 
 echo "creando los usuarios"
 echo "Primero creamos al usuario del consumidor 1 y damos permisos"
-sudo su
 rabbitmqctl add_user consumidorUno password
 rabbitmqctl set_user_tags consumidorUno administrador
 rabbitmqctl set_permissions -p / consumidorUno "." "." "."
